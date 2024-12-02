@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="container border border-1 border-dark-subtle rounded bg-dark-subtle p-3 d-flex justify-content-center flex-column row-gap-3" style="height: 85vh;">      
+    <h3>Shift Schedule</h3>  
+    <div class="bg-light border border-1 border-dark-subtle rounded p-1" style="height: 80%;">
+      <div class="container d-grid row-gap-2"> 
+
+          <!-- Monday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Monday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+          <!-- Tuesday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Tuesday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+          <!-- Wednesday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Wednesday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+          <!-- Thursday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Thursday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+          <!-- Friday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Friday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+          <!-- Saturday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Saturday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+          <!-- Sunday -->
+          <div class="row row-cols-2 p-3 border border-1 border-dark-subtle rounded-4">
+            <div class="col">Sunday</div>
+            <div class="col">11:00 - 15:00</div>
+          </div>
+
+      </div>
+    </div>
+    <!-- <button class="btn btn-secondary">REQUEST CHANGE</button> -->
+
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changeReqModal">
+      REQUEST CHANGE
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="changeReqModal" tabindex="-1" aria-labelledby="changeReqModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-dark text-light">
+            <h1 class="modal-title fs-5" id="changeReqModalLabel">Request Shift Change</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="">
+                <label for="message-text" class="col-form-label">Shift Change:</label>
+                <textarea class="form-control border-dark-subtle border" id="message-text" placeholder="from Monday 11:00-15:00 to Tuesday 11:00-15:00"></textarea>
+              </div>
+              
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Reason:</label>
+                <textarea class="form-control border-dark-subtle border" id="message-text" placeholder="Mark jerome Bading"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Submit Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

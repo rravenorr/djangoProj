@@ -5,27 +5,21 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if user.is_authenticated %}
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Shift Change</a>
+            <a class="nav-link" href="{% url 'shiftchange' %}">Shift Change</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Notifications</a>
+            <a class="nav-link" href="{% url 'notifications' %}">Notifications</a>
           </li>
         </ul>
 
-        {% if user.is_authenticated %}
-
         <form class="d-flex mb-2" role="log">
           <a class="btn btn-outline-danger" type="submit" href="{% url 'logout' %}">Logout</a>
-        </form>
-
-        {% else %}
-        <form class="d-flex mb-2" role="log">
-          <a class="btn btn-outline-success" type="submit" href="{% url 'home' %}">Login</a>
         </form>
         {% endif %}
     

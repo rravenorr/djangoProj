@@ -18,6 +18,12 @@ def home(request):
             return render(request, 'home.html', {})
     else:
         return render(request, 'home.html', {})
+    
+def shiftC(request):
+    return render(request, 'shift.html', {})
+
+def notifications(request):
+    return render(request, 'notifs.html', {})
 
 def logout_user(request):
     logout(request)
