@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">ShipWreck</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Shift Change</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Notifications</a>
+          </li>
+        </ul>
+
+        {% if user.is_authenticated %}
+
+        <form class="d-flex mb-2" role="log">
+          <a class="btn btn-outline-danger" type="submit" href="{% url 'logout' %}">Logout</a>
+        </form>
+
+        {% else %}
+        <form class="d-flex mb-2" role="log">
+          <a class="btn btn-outline-success" type="submit" href="{% url 'home' %}">Login</a>
+        </form>
+        {% endif %}
+    
+    </div>
+    </div>
+  </nav>

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Wrapper for the two divs -->
+            <div class="d-flex flex-column gap-2" style="height: 85vh;">
+                <div class="flex-shrink-0 border rounded p-3 bg-dark-subtle shadow-sm border border-1 border-dark-subtle" style="height: 33%;">
+                    <p>Username: {{ user.username }}</p>
+                    <p>Branch:</p>
+                    <p>Shift:</p>
+               
+                    <div class="d-grid gap-2 col-8  mx-auto">
+                        <button class="btn btn-primary border border-1 border-dark-subtle" type="button">FACE IN</button>
+                    </div>
+                
+                </div>
+
+                <div class="flex-shrink-0 border rounded p-3 bg-dark-subtle d-flex  flex-column shadow-sm border border-1 border-dark-subtle" style="height: 66%;">
+                        <h5>Shift Logs</h5>
+                        <div class="bg-light rounded mb-1 border border-1 border-dark-subtle mb-1 p-1">
+                            <div class="container rounded mb-1 overflow-y-auto overflow-x-hidden">
+                                <div class="row pt-1"  style="font-size: 12px;">
+                                  <div class="col">DATE</div>
+                                  <div class="col">IN</div>
+                                  <div class="col">OUT</div>
+                                </div>
+                            </div>
+
+                        </div>
+                
+                        <div class="bg-light rounded flex-grow-1 border border-1 border-dark-subtle">
+                            <div class="container rounded mb-1 overflow-y-auto overflow-x-hidden">
+                                <div class="row border py-1 bg-body-secondary" style="font-size: 12px;">
+                                    <div class="col">12/01/24</div>
+                                    <div class="col">11am</div>
+                                    <div class="col">11pm</div>
+                                </div>
+                            </div>
+                                                 
+                        </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {%else%}
+
+<div class="container px-5">
+
+    
+
+    <h1>Employee Login</h1>
+
+        <br>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-floating mb-3">
+            <input type="text   " class="form-control" id="floatingInput" placeholder="Mark Jerome Gimena" required name="username">
+            <label for="floatingInput">Username</label>
+          </div>
+          <br>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required name="password">
+            <label for="floatingPassword">Password</label>
+          </div>
+        <br>
+        <button type="submit" class="btn btn-secondary">Login</button>
+      </form>
+</div>
+
+{% endif %}
+{% endblock %}
