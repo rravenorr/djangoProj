@@ -55,22 +55,26 @@
 
             <!-- admin pane; -->
             <div class="row row-cols-5">
-                <!-- First Card -->
-                <div class="p-2 d-flex">
+                {% for branch in branches %}
+                    
+                    <div class="p-2 d-flex">
                     <div class="card bg-light-subtle shadow border-1 border-dark-subtle" style="box-sizing: border-box; flex: 1;">
-                        <img src="https://lh5.googleusercontent.com/p/AF1QipOM9jygQMCTv2ckyLorJw6MYJt_SAicmmXP0GyV=w408-h380-k-no" 
-                             class="card-img-top border border-1 border-dark-subtle" alt="...">
+                        
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Pacita</h5>
+                            <br>
+                            <h3 class="card-title">{{ branch.branch_name }}</h3>
                             <hr>
-                            <p>Address: Sample Address</p>
-                            <p>IP Address: 127.0.0.1</p>
+                            <p>Address: {{ branch.branch_address }}</p>
+                            <p>IP Address: {{ branch.branch_IP }}</p>
+                            <p>Branch ID: {{ branch.branch_id }}</p>
                             
-                            <a href="{% url 'branch' %}" class="btn btn-primary align-self-end">View Info</a>
+                            <a href="{% url 'branch' branch.branch_id %}" class="btn btn-primary align-self-end">View Info</a>
                         </div>
                     </div>
-                </div>
-            
+                    </div>
+
+                {% endfor %}
+
                 <!-- Second Card -->
                 <div class="p-2 d-flex">
                     <div class="card bg-light-subtle shadow d-flex" style="box-sizing: border-box; flex: 1;">

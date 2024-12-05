@@ -8,5 +8,5 @@ urlpatterns = [
     path('register/', views.register_user, name='register'),
     path('shiftchange/', views.shiftC, name='shiftchange'),
     path('notifications/', views.notifications, name='notifications'),
-    path('branch/', views.view_branch, name='branch'),
+    path('branch/<int:pk>/', views.view_branch, name='branch'),
 ]

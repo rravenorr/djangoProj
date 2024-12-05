@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import branch
 
 # Create your views here.
 
 
 
 def home(request):
-    return render(request, 'home.html', {})
+    branches = branch.objects.all()  # Fetch all branch objects
+    return render(request, 'home.html', {'branches': branches})  # Pass them as 'branches'
+
 
 def login_user(request):
     #log in check
@@ -51,5 +54,6 @@ def register_user(request):
 
 	return render(request, 'register.html', {'form':form})
 
-def view_branch(request):
-    return render(request, 'branch.html', {})
+def view_branch(request, pk):
+    branch_info = branch.objects.get(branch_id=pk)
+    return render(request, 'branch.html', {'branch_info': branch_info})
