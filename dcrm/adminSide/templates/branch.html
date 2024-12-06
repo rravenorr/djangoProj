@@ -42,65 +42,84 @@
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-
                         <div class="d-flex justify-content-center mb-2">
                             <h3>Monday</h3>
                         </div>
                         
-        
-                        <div class=" flex-grow-1 d-flex mb-2 ">
-                            <div class="d-flex gap-2 flex-grow-1">
-                                <div class="px-3 me-2 border border-1 border-dark-subtle rounded d-flex flex-column justify-content-center"  style="font-size: 12px;">
-                                    <div>1:00 pm </div>
-                                    <div>to</div>
-                                    <div>11:00 pm</div>
-                                </div>
-        
-                                <div class="row row-cols-5  flex-grow-1">
-                                    
-                                    <div class="px-1 d-flex">
-                                    <div class=" border border-1 border-dark-subtle rounded p-3 d-flex flex-column flex-grow-1" style="font-size: 12px;">
-        
-                                        <div class="mb-auto text-start">
-                                            <h6>Mark Jerome Gimena</h6>
-                                            <hr>
-                                        </div>
-                                        <button class="btn btn-outline-danger">
-                                            remove
-                                        </button>
+                        {% for shift in shifts %}
+                            <div class="flex-grow-1 d-flex mb-2">
+                                <div class="d-flex gap-2 flex-grow-1">
+                                    <div class="px-3 me-2 border border-1 border-dark-subtle rounded d-flex flex-column justify-content-center" style="font-size: 12px;">
+                                        <div>{{ shift.shift_start|date:"h:i A" }}</div>
+                                        <div>to</div>
+                                        <div>{{ shift.shift_end|date:"h:i A" }}</div>
                                     </div>
-                                    </div>
-        
-                                    <div class="px-1 d-flex">
-                                        <div class=" border border-1 border-dark-subtle rounded p-3 d-flex flex-column flex-grow-1" style="font-size: 12px;">
-            
-                                            <div class="mb-auto text-start">
-                                                <h6>Mark Jerome Gimena</h6>
-                                                <hr>
+
+                                    <div class="row row-cols-5 flex-grow-1">
+                                        {% for employee in employees_by_shift.shift_id %}
+                                            <div class="px-1 d-flex">
+                                                <div class="border border-1 border-dark-subtle rounded p-3 d-flex flex-column flex-grow-1" style="font-size: 12px;">
+                                                    <div class="mb-auto text-start">
+                                                        <h6>{{ employee.first_name }} {{ employee.last_name }}</h6>
+                                                        <hr>
+                                                    </div>
+                                                    <button class="btn btn-outline-danger">
+                                                        Remove
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <button class="btn btn-outline-danger">
-                                                remove
-                                            </button>
+                                        {% empty %}
+                                            <div class="px-1 d-flex">
+                                                <div class="border border-1 border-dark-subtle rounded p-3 d-flex flex-column flex-grow-1" style="font-size: 12px;">
+                                                    <div class="mb-auto text-start">
+                                                        <h6>No employee assigned</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                        <div class="px-1 d-flex">
+                                            <div class="d-flex flex-grow-1" style="font-size: 12px;">
+                                                <button type="button" class="btn btn-outline-primary" style="flex: 1;" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                                                    Add
+                                                </button>
+                                                
+                                                <!-- Modal for Adding Employee to Shift -->
+                                                <div class="modal" id="addEmployeeModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLabel">Assign Employee to Shift</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="POST" action="{% url 'assign_employee_to_shift' %}">
+                                                                    {% csrf_token %}
+                                                                    <input type="hidden" name="branch_id" value="{{ branch_info.branch_id }}">
+                                                                    <input type="hidden" name="shift_id" value="{{ shift.shift_id }}">
+                                                                    <select name="employee_id">
+                                                                        <option value="">Select Employee</option>
+                                                                        {% for employee in employees %}
+                                                                        <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                    <button type="submit" class="btn btn-primary">Assign</button>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </div>
-                                        </div>                           
-        
-                                    
-                                    <div class="px-1 d-flex">
-                                    <div class="d-flex flex-grow-1" style="font-size: 12px;">
-                                            <button type="button" class="btn btn-outline-primary" style="flex: 1;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                Add
-                                            </button>
-           
                                     </div>
-                                    </div>
-                                
+
                                 </div>
-        
                             </div>
+                        {% endfor %}
+
                         </div>
-
-                      </div>
-
                     </div>
 
                     
@@ -138,7 +157,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                
+                    
+                    <div class="mb-3">
+                        <label for="newShiftStart " class="form-label">Shift day</label>
+                        <input type="text" class="form-control border border-dark-subtle border-1" id="newShiftStart">    
+                    </div>
+
                     <div class="mb-3">
                         <label for="newShiftStart " class="form-label">Shift Start:</label>
                         <input type="text" class="form-control border border-dark-subtle border-1" id="newShiftStart">    
